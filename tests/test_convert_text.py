@@ -86,13 +86,11 @@ def test_all():
     assert md == md2panflute2md
 
     print("\nBack and forth conversions... md table -> json(standalone) -> md table")
-    md = """lorem
-
-  --- ---
+    md = """  --- ---
   x   y
   --- ---
 
-ipsum"""
+"""
     print("[MD]", repr(md))
     md2json = pf.convert_text(md, input_format='markdown', output_format='json', standalone=True)
     print("[json]", md2json)

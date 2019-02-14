@@ -23,7 +23,9 @@ except ImportError:
 from subprocess import Popen, PIPE
 from functools import partial
 
-from six import string_types
+
+py2 = sys.version_info[0] == 2
+if py2: str = basestring
 
 
 # ---------------------------
@@ -232,7 +234,7 @@ def _get_metadata(self, key='', default=None, builtin=True):
     """
 
     # Retrieve metadata
-    assert isinstance(key, string_types)
+    assert isinstance(key, str)
     meta = self.metadata
 
     # Retrieve specific key
@@ -278,7 +280,7 @@ def shell(args, wait=True, msg=None):
     """
 
     # Fix Windows error if passed a string
-    if isinstance(args, string_types):
+    if isinstance(args, str):
         args = shlex.split(args, posix=(os.name != "nt"))
         if os.name == "nt":
             args = [arg.replace('/', '\\') for arg in args]
